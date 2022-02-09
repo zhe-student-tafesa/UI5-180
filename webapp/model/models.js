@@ -83,6 +83,32 @@ sap.ui.define([
                         SubmissionDate: "2022-01-02T08:00:00.007Z",
                         SubmittedBy: "Ronald McDoogle",
                     },{
+                        AssetName: "4G63 Engine",
+                        Suitability: 5,
+                        SuitabilityComment: "",
+                        Value: 5,
+                        ValueComment: "",
+                        Durability: 5,
+                        DurabilityComment: "",
+                        Longevity: 5,
+                        LongevityComment: "",
+                        SummaryComments: "",
+                        SubmissionDate: "2022-02-06T14:00:00.007Z",
+                        SubmittedBy: "Robert Jones",
+                    },{
+                        AssetName: "4G63 Engine",
+                        Suitability: 4,
+                        SuitabilityComment: "",
+                        Value: 4,
+                        ValueComment: "",
+                        Durability: 5,
+                        DurabilityComment: "",
+                        Longevity: 5,
+                        LongevityComment: "",
+                        SummaryComments: "",
+                        SubmissionDate: "2022-02-07T14:00:00.007Z",
+                        SubmittedBy: "James Smith",
+                    },{
                         AssetName: "Ferrari F90",
                         Suitability: 5,
                         SuitabilityComment: "This asset is suitable for the job.",
@@ -121,6 +147,26 @@ sap.ui.define([
                         SummaryComments: "",
                         SubmissionDate: "2021-11-18T05:00:00.007Z",
                         SubmittedBy: "Sarah Rose",
+                    }],                    
+                    Assets: [{
+                        AssetName: "Drone Quadcopter"
+                    },{
+                        AssetName: "X Series Forklift"
+                    },{
+                        AssetName: "Ferrari F90"
+                    },{
+                        AssetName: "4G63 Engine"
+                    }],
+                    Reviewers: [{
+                        AssetName: "Robert Jones"
+                    },{
+                        AssetName: "Layla Parker"
+                    },{
+                        AssetName: "Ronald McDoogle"
+                    },{
+                        AssetName: "James Smith"
+                    },{
+                        AssetName: "Sarah Rose"
                     }]
                 };
             }
