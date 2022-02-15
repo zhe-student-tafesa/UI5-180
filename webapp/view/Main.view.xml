@@ -1,18 +1,68 @@
-<mvc:View
-    controllerName="T180.fiorichallenge.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc"
-    displayBlock="true"
-    xmlns="sap.m">
+<mvc:View controllerName="T180.fiorichallenge.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
     <Shell id="shell">
         <App id="app">
             <pages>
                 <Page id="page" title="{i18n>pageTitle}">
                     <content>
                         <!-- Example text binding from the Asset Review model -->
-                        <Text text="{AssetReviewModel>/CurrentDate}" id="exampleText" class="sapUiSmallMargin"/>
+                        <Text text="{AssetReviewModel>/CurrentDate}" id="exampleText" class="sapUiSmallMargin" />
+
+                        <Text text="Number of Reviews: {/recipient/Length}" id="myText" class="sapUiSmallMargin" />
+                        <Table id="ReviewsTable" inset="true">
+                            <columns>
+                                <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+                                    <Text text="AssetName" />
+                                </Column>
+
+                                <Column minScreenWidth="Medium" demandPopin="true" hAlign="Right">
+                                    <Text text="Suitability" />
+                                </Column>
+
+
+                                <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+                                    <Text text="SuitabilityComment" />
+                                </Column>
+
+                                <Column minScreenWidth="Medium" demandPopin="true" hAlign="Right">
+                                    <Text text="Value" />
+                                </Column>
+
+                                <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+                                    <Text text="ValueComment" />
+                                </Column>
+                                <Column minScreenWidth="Medium" demandPopin="true" hAlign="Right">
+                                    <Text text="Durability" />
+                                </Column>
+
+                                <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+                                    <Text text="DurabilityComment" />
+                                </Column>
+
+                                <Column minScreenWidth="Medium" demandPopin="true" hAlign="Right">
+                                    <Text text="Longevity" />
+                                </Column>
+                                <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+                                    <Text text="LongevityComment" />
+                                </Column>
+
+                                <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+                                    <Text text="SummaryComments" />
+                                </Column>
+
+                                <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+                                    <Text text="SubmissionDate" />
+                                </Column>
+                                <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+                                    <Text text="SubmittedBy" />
+                                </Column>
+
+                            </columns>
+                        </Table>
+
                     </content>
                 </Page>
             </pages>
         </App>
+
     </Shell>
 </mvc:View>
