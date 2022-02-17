@@ -72,17 +72,89 @@ sap.ui.define([
                 // Calculate how many entries are in the ‘Reviews’ array of the ‘AssetReviewModel’, and display it on the page.
                 var myReviews= this.getView().getModel("AssetReviewModel").getProperty("/Reviews");
                 var reviewsLength=myReviews.length;
-                //bound to the XML view
+                //bound length to the XML view
+                // var oData = {
+                //     recipient: {
+                //         Length: reviewsLength
+                //     }
+                // };
+                // var oModel = new JSONModel(oData);
+
                 var oData = {
                     recipient: {
                         Length: reviewsLength
+                    },
+                    newReviews: {
+                        AssetName: "Asset Name",
+                        Suitability: 0,
+                        SuitabilityComment: "",
+                        Value: 0,
+                        ValueComment: "",
+                        Durability: 0,
+                        DurabilityComment: "",
+                        Longevity: 0,
+                        LongevityComment: "",
+                        SummaryComments: "",
+                        SubmissionDate: "YYYY-MM-DD",
+                        SubmittedBy: ""
+    
                     }
                 };
                 var oModel = new JSONModel(oData);
+
+
+
                 this.getView().setModel(oModel);
+                //set date format YYYY-MM-DD , begin
+                for (var i = 0; i < myReviews.length; i++) {
+                    myReviews[i].SubmissionDate = myReviews[i].SubmissionDate.substr(0, 10);
+                }
+                this.getView().getModel("AssetReviewModel").setProperty("/Reviews", myReviews); //update  model
+                //set date format YYYY-MM-DD  end
                     
                 console.log("123");
 
+            },
+            onAddReview() {
+                var newReviews = {
+                    AssetName: "",
+                    Suitability: 0,
+                    SuitabilityComment: "",
+                    Value: 0,
+                    ValueComment: "",
+                    Durability: 0,
+                    DurabilityComment: "",
+                    Longevity: 0,
+                    LongevityComment: "",
+                    SummaryComments: "",
+                    SubmissionDate: "2022-02-07",
+                    SubmittedBy: ""
+                };
+                var oBundle = this.getView().getModel("i18n").getResourceBundle(); //Bundle 包111ill    一比i矮
+    
+                newReviews.AssetName = this.getView().getModel().getProperty("/newReviews/AssetName"); //Recipient 接受者，领受者；接收器，容器
+                newReviews.Suitability = this.getView().getModel().getProperty("/newReviews/Suitability");
+                newReviews.SuitabilityComment = this.getView().getModel().getProperty("/newReviews/SuitabilityComment");
+                newReviews.Value = this.getView().getModel().getProperty("/newReviews/Value");
+                newReviews.ValueComment = this.getView().getModel().getProperty("/newReviews/ValueComment");
+                newReviews.Durability = this.getView().getModel().getProperty("/newReviews/Durability");
+                newReviews.DurabilityComment = this.getView().getModel().getProperty("/newReviews/DurabilityComment");
+                newReviews.Longevity = this.getView().getModel().getProperty("/newReviews/Longevity");
+                newReviews.LongevityComment = this.getView().getModel().getProperty("/newReviews/LongevityComment");
+                newReviews.SummaryComments = this.getView().getModel().getProperty("/newReviews/SummaryComments");
+                newReviews.SubmissionDate = this.getView().getModel().getProperty("/newReviews/SubmissionDate");
+                newReviews.SubmittedBy = this.getView().getModel().getProperty("/newReviews/SubmittedBy");
+    
+    
+                console.log(newReviews);
+                //get old data
+                var myReviews = this.getView().getModel("AssetReviewModel").getProperty("/Reviews");
+                // add new data to  old data
+                myReviews.push(newReviews); // add new  data
+                var reviewsLength = myReviews.length;
+                //set  model
+                this.getView().getModel("AssetReviewModel").setProperty("/Reviews", myReviews);
+    
             }
         });
     });
