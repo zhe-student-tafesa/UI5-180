@@ -87,7 +87,7 @@
                         <Label text="SubmissionDate" />
                         <Input value="{/newReviews/SubmittedBy}" description="" valueLiveUpdate="true" width="60%" />
                         <Label text="SubmittedBy" />
-                        <Button text="Add Review"  type="Accept" press=".onAddReview"    />
+                        <Button text="Add Review"  class="myAppAddBtn" type="Accept" press=".onAddReview"    />
 
                     </content>
                 </Page>

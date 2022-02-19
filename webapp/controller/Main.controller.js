@@ -2,11 +2,12 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "T180/fiorichallenge/model/models",
+    "sap/m/MessageToast"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel, models) {
+    function (Controller, JSONModel, models,MessageToast) {
         "use strict";
 
         return Controller.extend("T180.fiorichallenge.controller.Main", {
@@ -73,13 +74,6 @@ sap.ui.define([
                 var myReviews= this.getView().getModel("AssetReviewModel").getProperty("/Reviews");
                 var reviewsLength=myReviews.length;
                 //bound length to the XML view
-                // var oData = {
-                //     recipient: {
-                //         Length: reviewsLength
-                //     }
-                // };
-                // var oModel = new JSONModel(oData);
-
                 var oData = {
                     recipient: {
                         Length: reviewsLength
@@ -130,9 +124,9 @@ sap.ui.define([
                     SubmissionDate: "2022-02-07",
                     SubmittedBy: ""
                 };
-                var oBundle = this.getView().getModel("i18n").getResourceBundle(); //Bundle 包111ill    一比i矮
-    
-                newReviews.AssetName = this.getView().getModel().getProperty("/newReviews/AssetName"); //Recipient 接受者，领受者；接收器，容器
+                var oBundle = this.getView().getModel("i18n").getResourceBundle(); //
+                //get data from input value
+                newReviews.AssetName = this.getView().getModel().getProperty("/newReviews/AssetName"); //
                 newReviews.Suitability = this.getView().getModel().getProperty("/newReviews/Suitability");
                 newReviews.SuitabilityComment = this.getView().getModel().getProperty("/newReviews/SuitabilityComment");
                 newReviews.Value = this.getView().getModel().getProperty("/newReviews/Value");
@@ -152,8 +146,18 @@ sap.ui.define([
                 // add new data to  old data
                 myReviews.push(newReviews); // add new  data
                 var reviewsLength = myReviews.length;
-                //set  model
+                //set Property in AssetReviewModel model
                 this.getView().getModel("AssetReviewModel").setProperty("/Reviews", myReviews);
+                
+                
+                //update length
+                var newLength="Number of Reviews : "+" "+reviewsLength;
+                var lengthText = this.getView().byId("myText");
+                lengthText.setText(newLength);//  set Text
+                
+                // Reminder that the update was successful
+                MessageToast.show("Review added successfully");
+
     
             }
         });
