@@ -1,37 +1,31 @@
-<mvc:View controllerName="T180.fiorichallenge.controller.Main" xmlns:mvc="sap.ui.core.mvc" 
-  xmlns:viz="sap.viz.ui5.controls" displayBlock="true" xmlns="sap.m">
+<mvc:View controllerName="T180.fiorichallenge.controller.Main" xmlns:mvc="sap.ui.core.mvc" xmlns:viz="sap.viz.ui5.controls" displayBlock="true" xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data" height="100%">
     <Shell id="shell">
         <App id="app">
             <pages>
                 <Page id="page" title="{i18n>pageTitle}">
-
-
-         <content>
-               <FlexBox  >
-            <items>
-                <viz:VizFrame xmlns="sap.viz" id="idpiechart" vizType="pie"></viz:VizFrame>
-            </items>
-                </FlexBox>
-        </content>
-
-
                     <content>
                         <!-- Example text binding from the Asset Review model -->
                         <Text text="{AssetReviewModel>/CurrentDate}" id="exampleText" class="sapUiSmallMargin" />
-
+                        <!-- show the length of Reviews array -->
                         <Text text="Number of Reviews: {/recipient/Length}" id="myText" class="sapUiSmallMargin" />
+                        <!-- pie chart :FlexBox -->
+                        <FlexBox>
+                            <items>
+                                <viz:VizFrame xmlns="sap.viz" id="idpiechart" vizType="pie"></viz:VizFrame>
+                            </items>
+                        </FlexBox>
+                    </content>
+                    <content>
+                        <!-- draw table -->
                         <Table id="ReviewsTable" inset="true">
-
-                        <headerToolbar>
-                               <Toolbar>
-                                <ToolbarSpacer> </ToolbarSpacer> 
-                                <Button icon="sap-icon://add" text="Add Review"  press="handleAddReview" />
-                                
-                               </Toolbar>
-
-                        </headerToolbar>
+                            <headerToolbar>
+                                <Toolbar>
+                                    <ToolbarSpacer></ToolbarSpacer>
+                                    <Button icon="sap-icon://add" text="Add Review" press="handleAddReview" />
+                                </Toolbar>
+                            </headerToolbar>
                             <columns>
-                                <!-- table header -->
+                                <!-- table header begin -->
                                 <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
                                     <Text text="AssetName" />
                                 </Column>
@@ -39,7 +33,6 @@
                                 <Column minScreenWidth="Medium" demandPopin="true" hAlign="Right">
                                     <Text text="Suitability" />
                                 </Column>
-
 
                                 <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
                                     <Text text="SuitabilityComment" />
@@ -74,17 +67,16 @@
                                 <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
                                     <Text text="SubmissionDate" />
                                 </Column>
+
                                 <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
                                     <Text text="SubmittedBy" />
                                 </Column>
-
+                                <!-- table header END -->
                             </columns>
                         </Table>
-
                     </content>
                 </Page>
             </pages>
         </App>
-
     </Shell>
 </mvc:View>

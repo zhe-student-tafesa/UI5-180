@@ -40,10 +40,15 @@
   "sap.ui5": {
     "flexEnabled": false,
     "dependencies": {
-      "minUI5Version": "1.97.2",
+      
+        "minUI5Version": "1.97.2",
+
       "libs": {
-        "sap.ui.core": {}
-      }
+        "sap.viz": {},
+        "sap.ui.layout": {},
+        "sap.m": {}
+    }
+    
     },
     "contentDensities": {
       "compact": true,
