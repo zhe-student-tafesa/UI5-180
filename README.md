@@ -1,4 +1,6 @@
 ## Application Details
+use SAPUI5 (MVC) to draw Pie chart, draw Table.
+use fragment add new date to Model and update the view(Pie chart, Table and Text).
 |               |
 | ------------- |
 |**Generation Date and Time**<br>Sat Feb 05 2022 04:30:10 GMT+0000 (Coordinated Universal Time)|
