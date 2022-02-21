@@ -1,15 +1,37 @@
-<mvc:View controllerName="T180.fiorichallenge.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+<mvc:View controllerName="T180.fiorichallenge.controller.Main" xmlns:mvc="sap.ui.core.mvc" 
+  xmlns:viz="sap.viz.ui5.controls" displayBlock="true" xmlns="sap.m">
     <Shell id="shell">
         <App id="app">
             <pages>
                 <Page id="page" title="{i18n>pageTitle}">
+
+
+         <content>
+               <FlexBox  >
+            <items>
+                <viz:VizFrame xmlns="sap.viz" id="idpiechart" vizType="pie"></viz:VizFrame>
+            </items>
+                </FlexBox>
+        </content>
+
+
                     <content>
                         <!-- Example text binding from the Asset Review model -->
                         <Text text="{AssetReviewModel>/CurrentDate}" id="exampleText" class="sapUiSmallMargin" />
 
                         <Text text="Number of Reviews: {/recipient/Length}" id="myText" class="sapUiSmallMargin" />
                         <Table id="ReviewsTable" inset="true">
+
+                        <headerToolbar>
+                               <Toolbar>
+                                <ToolbarSpacer> </ToolbarSpacer> 
+                                <Button icon="sap-icon://add" text="Add Review"  press="handleAddReview" />
+                                
+                               </Toolbar>
+
+                        </headerToolbar>
                             <columns>
+                                <!-- table header -->
                                 <Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
                                     <Text text="AssetName" />
                                 </Column>
@@ -58,36 +80,6 @@
 
                             </columns>
                         </Table>
-                        <!-- add  new  review  -->
-                         <Input value="{/newReviews/AssetName}" description="" valueLiveUpdate="true" width="60%" />
-                        <Label text="Asset Name" />
-                        <Input value="{/newReviews/Suitability}" type="Number"  valueLiveUpdate="true" width="60%" />
-                        <Label text="Suitability" />
-                        <Input value="{/newReviews/SuitabilityComment}" description="" valueLiveUpdate="true" width="60%" />
-                        <Label text="SuitabilityComment" />
-
-                        <Input value="{/newReviews/Value}" type="Number"  valueLiveUpdate="true" width="60%" />
-                        <Label text="Value" />
-                        <Input value="{/newReviews/ValueComment}"  valueLiveUpdate="true" width="60%" />
-                        <Label text="ValueComment" />
-                        <Input value="{/newReviews/Durability}" type="Number"   valueLiveUpdate="true" width="60%" />
-                        <Label text="Durability" />
-
-                        <Input value="{/newReviews/DurabilityComment}" description="" valueLiveUpdate="true" width="60%" />
-                        <Label text="DurabilityComment" />
-                        <Input value="{/newReviews/Longevity}" type="Number"   valueLiveUpdate="true" width="60%" />
-                        <Label text="Longevity" />
-                        <Input value="{/newReviews/LongevityComment}" description="" valueLiveUpdate="true" width="60%" />
-                        <Label text="LongevityComment" />
-
-                        <Input value="{/newReviews/SummaryComments}" description="" valueLiveUpdate="true" width="60%" />
-                        <Label text="SummaryComments" />
-
-                        <Input value="{/newReviews/SubmissionDate}" placeholder="Enter Date(YYYY-MM-DD)" valueLiveUpdate="true" width="60%" />
-                        <Label text="SubmissionDate" />
-                        <Input value="{/newReviews/SubmittedBy}" description="" valueLiveUpdate="true" width="60%" />
-                        <Label text="SubmittedBy" />
-                        <Button text="Add Review"  class="myAppAddBtn" type="Accept" press=".onAddReview"    />
 
                     </content>
                 </Page>

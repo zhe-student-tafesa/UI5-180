@@ -1,6 +1,11 @@
 sap.ui.define([
     "sap/ui/model/json/JSONModel",
-    "sap/ui/Device"
+    "sap/ui/Device",
+        'sap/viz/ui5/controls/common/feeds/FeedItem',
+    'sap/viz/ui5/data/FlattenedDataset',
+    'sap/viz/ui5/format/ChartFormatter',
+'sap/viz/ui5/api/env/Format'
+
 ], 
     /**
      * provide app-view type models (as in the first "V" in MVVC)
@@ -10,7 +15,7 @@ sap.ui.define([
      * 
      * @returns {Function} createDeviceModel() for providing runtime info for the device the UI5 app is running on
      */
-    function (JSONModel, Device) {
+    function (JSONModel, Device,FeedItem,FlattenedDataset,ChartFormatter,Format) {
         "use strict";
 
         return {
@@ -147,7 +152,29 @@ sap.ui.define([
                         SummaryComments: "",
                         SubmissionDate: "2021-11-18T05:00:00.007Z",
                         SubmittedBy: "Sarah Rose",
-                    }],                    
+                    }],  
+                    'average': [
+                        {
+                        "review": "Suitability",
+                        "avgScore": "5"
+                    },
+
+                    {
+                        "review": "Value",
+                        "avgScore": "5.30"
+                    },
+
+                    {
+                        "review": "Durability",
+                        "avgScore": "1.62"
+                    },
+
+                    {
+                        "review": "Longevity",
+                        "avgScore": "6.70"
+                    }
+                    
+                    ],                  
                     Assets: [{
                         AssetName: "Drone Quadcopter"
                     },{

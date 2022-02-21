@@ -1,20 +1,40 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
+    
     "T180/fiorichallenge/model/models",
-    "sap/m/MessageToast"
+    "sap/m/MessageToast",
+    "sap/ui/core/format/DateFormat"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel, models,MessageToast) {
+    function (Controller, JSONModel, models,MessageToast,DateFormat) {
         "use strict";
 
         return Controller.extend("T180.fiorichallenge.controller.Main", {
             onInit: function () {
+                var today=DateFormat.getDateInstance({pattern: "yyyy-MM-dd"}).format(new Date());
+                
+                            this.reviewDialog = { //save dialog data
+                                    AssetName: "Asset Name",
+                        Suitability: 0,
+                        SuitabilityComment: "",
+                        Value: 0,
+                        ValueComment: "",
+                        Durability: 0,
+                        DurabilityComment: "",
+                        Longevity: 0,
+                        LongevityComment: "",
+                        SummaryComments: "",
+                        SubmissionDate: today,
+                        SubmittedBy: ""
+                                };
+                    console.log(this.reviewDialog);
+                    
                 var oTable = this.getView().byId("ReviewsTable");
 
-                // bind data
+                // bind data to oTable
                 oTable.bindItems({
                     path: "AssetReviewModel>/Reviews",
                     template: new sap.m.ColumnListItem({
@@ -61,6 +81,130 @@ sap.ui.define([
                     })
                 });
 
+                // 1 pie chart
+                this.oVizFrame = this.getView().byId("idpiechart");
+                //2 pie chart 
+                //oModel,  setData
+                            var oModel = new sap.ui.model.json.JSONModel();
+            var data = {
+                'Sales': [{
+                        "DrugName": "Cro",
+                        "Revenue": "3.30"
+                    },
+
+                    {
+                        "DrugName": "Vicks",
+                        "Revenue": "5.30"
+                    },
+
+                    {
+                        "DrugName": "Dolo",
+                        "Revenue": "1.62"
+                    },
+
+                    {
+                        "DrugName": "Bp4",
+                        "Revenue": "6.70"
+                    },
+
+                    {
+                        "DrugName": "Th5",
+                        "Revenue": "2.30"
+                    }
+                ]
+            };
+            oModel.setData(data);
+
+
+                
+
+                //3 create a viz dataset -to feed the data to the graph
+                                        var oDataset = new sap.viz.ui5.data.FlattenedDataset({
+                                    dimensions: [{
+                                        name: "Medicine",
+                                        value: "{DrugName}"
+                                    }],
+                                    measures: [{
+                                        name: "Cost", ///////////111111
+                                        value: "{Revenue}"
+                                    }],
+                                    data: {
+                                        path: "/Sales"
+                                    }
+                                });
+                    //             oVizFrame.setDataset(oDataset);
+                    //             oVizFrame.setModel(oModel); // model的名字
+                    
+                    //             this.oVizFrame.setDataset(oDataset);
+                    //             this.oVizFrame.setModel("AssetReviewModel"); // model的名字
+                                //4set property for viz
+//             oVizFrame.setVizProperties({
+//                 title: {
+//                     text: "Revenue"
+//                 },
+//                 plotArea: {
+//                     colorPalette: d3.scale.category20().range(),
+//                     drawingEffect: "glossy"
+//                 }
+//             });
+//             var feedSize = new sap.viz.ui5.controls.common.feeds.FeedItem({
+//                 "uid": "size",
+//                 "type": "Measure",
+//                 "values": ["Cost"] ///////////111111
+//             });
+//             var feedColor = new sap.viz.ui5.controls.common.feeds.FeedItem({
+//                 "uid": "color",
+//                 "type": "Dimension",
+//                 "values": ["Medicine"]
+//             });
+//             oVizFrame.addFeed(feedSize);
+//             oVizFrame.addFeed(feedColor);
+
+                    
+                
+
+
+            },
+            handleAddReview:function(){
+                if (!this.newStudentDialog) { // if not exist , new 
+                    this.newStudentDialog = sap.ui.xmlfragment("T180.fiorichallenge.view.Register", this);
+                    var oModel = new sap.ui.model.json.JSONModel(); // bind the dialog data
+                    this.newStudentDialog.setModel(oModel);
+                }
+                //bind  data to dialog  begin
+                //pass by value
+                var data = JSON.parse(JSON.stringify(this.reviewDialog)); //pass by value
+                this.newStudentDialog.getModel().setData(data); //pass by value
+                //bind  data to dialog  end
+
+    
+                this.newStudentDialog.open(); // globel variable  open Dialog
+            },
+            handleSaveBtnPress: function(oEvent) {
+                
+                var oModel = oEvent.getSource().getModel();
+                var oDialog = oModel.getData();
+    
+                //get view data
+                
+                var myReviews = this.getView().getModel("AssetReviewModel").getProperty("/Reviews");
+                // add new data to  old data
+                myReviews.push(oDialog); // add new  data
+                var reviewsLength = myReviews.length;
+                //set Property in AssetReviewModel model
+                // update Reviews array
+                this.getView().getModel("AssetReviewModel").setProperty("/Reviews", myReviews);
+
+
+                //close dialog
+                this.newStudentDialog.close(); // 
+                //update length
+                var newLength="Number of Reviews : "+" "+reviewsLength;
+                var lengthText = this.getView().byId("myText");
+                lengthText.setText(newLength);//  set Text
+                
+                // Reminder that the update was successful
+                MessageToast.show("Review added successfully");
             },
 
             onAfterRendering: function () {
@@ -77,28 +221,45 @@ sap.ui.define([
                 var oData = {
                     recipient: {
                         Length: reviewsLength
-                    },
-                    newReviews: {
-                        AssetName: "Asset Name",
-                        Suitability: 0,
-                        SuitabilityComment: "",
-                        Value: 0,
-                        ValueComment: "",
-                        Durability: 0,
-                        DurabilityComment: "",
-                        Longevity: 0,
-                        LongevityComment: "",
-                        SummaryComments: "",
-                        SubmissionDate: "YYYY-MM-DD",
-                        SubmittedBy: ""
-    
                     }
                 };
                 var oModel = new JSONModel(oData);
 
-
-
                 this.getView().setModel(oModel);
+                //2 pie chart 
+                //oModel,  setData
+                var avgSuitability=0;
+                var avgValue=0;
+                var avgDurability=0;
+                var avgLongevity=0;
+
+                for (var i = 0; i < myReviews.length; i++) {
+                   ;///求平均值，set 
+                }
+                this.myAverage=[
+                    {
+                    "review": "Suitability",
+                    "avgSuitability": "5"
+                },
+
+                {
+                    "review": "Value",
+                    "avgValue": "5.30"
+                },
+
+                {
+                    "review": "Durability",
+                    "avgDurability": "1.62"
+                },
+
+                {
+                    "review": "Longevity",
+                    "avgLongevity": "6.70"
+                }
+                
+                ];
+
+
                 //set date format YYYY-MM-DD , begin
                 for (var i = 0; i < myReviews.length; i++) {
                     myReviews[i].SubmissionDate = myReviews[i].SubmissionDate.substr(0, 10);
@@ -109,56 +270,9 @@ sap.ui.define([
                 console.log("123");
 
             },
-            onAddReview() {
-                var newReviews = {
-                    AssetName: "",
-                    Suitability: 0,
-                    SuitabilityComment: "",
-                    Value: 0,
-                    ValueComment: "",
-                    Durability: 0,
-                    DurabilityComment: "",
-                    Longevity: 0,
-                    LongevityComment: "",
-                    SummaryComments: "",
-                    SubmissionDate: "2022-02-07",
-                    SubmittedBy: ""
-                };
-                var oBundle = this.getView().getModel("i18n").getResourceBundle(); //
-                //get data from input value
-                newReviews.AssetName = this.getView().getModel().getProperty("/newReviews/AssetName"); //
-                newReviews.Suitability = this.getView().getModel().getProperty("/newReviews/Suitability");
-                newReviews.SuitabilityComment = this.getView().getModel().getProperty("/newReviews/SuitabilityComment");
-                newReviews.Value = this.getView().getModel().getProperty("/newReviews/Value");
-                newReviews.ValueComment = this.getView().getModel().getProperty("/newReviews/ValueComment");
-                newReviews.Durability = this.getView().getModel().getProperty("/newReviews/Durability");
-                newReviews.DurabilityComment = this.getView().getModel().getProperty("/newReviews/DurabilityComment");
-                newReviews.Longevity = this.getView().getModel().getProperty("/newReviews/Longevity");
-                newReviews.LongevityComment = this.getView().getModel().getProperty("/newReviews/LongevityComment");
-                newReviews.SummaryComments = this.getView().getModel().getProperty("/newReviews/SummaryComments");
-                newReviews.SubmissionDate = this.getView().getModel().getProperty("/newReviews/SubmissionDate");
-                newReviews.SubmittedBy = this.getView().getModel().getProperty("/newReviews/SubmittedBy");
-    
-    
-                console.log(newReviews);
-                //get old data
-                var myReviews = this.getView().getModel("AssetReviewModel").getProperty("/Reviews");
-                // add new data to  old data
-                myReviews.push(newReviews); // add new  data
-                var reviewsLength = myReviews.length;
-                //set Property in AssetReviewModel model
-                this.getView().getModel("AssetReviewModel").setProperty("/Reviews", myReviews);
-                
-                
-                //update length
-                var newLength="Number of Reviews : "+" "+reviewsLength;
-                var lengthText = this.getView().byId("myText");
-                lengthText.setText(newLength);//  set Text
-                
-                // Reminder that the update was successful
-                MessageToast.show("Review added successfully");
-
-    
+            handleCancelBtnPress: function() {
+                console.log("取消");
+                this.newStudentDialog.close(); // 
             }
         });
     });
