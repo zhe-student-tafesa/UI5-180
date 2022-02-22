@@ -1,82 +1,59 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:c="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:ui="sap.ui" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-    <Dialog id="addReviewDialog">
-        <f:SimpleForm id="addReviewForm" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" title="Add New Review Form" labelSpanL="2" labelSpanM="2" emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1" class="editableForm">
+    <Dialog id="addReviewDialog" >
+        <f:SimpleForm id="addReviewForm"  title="Add New Review Form"  width= "600px" class="editableForm  ">
             <f:content>
                 <!-- add  new  review  -->
-                <Label text="AssetName" />
+                <Label text="AssetName" class="sapUiSmallMarginTop  " />
                 <Input value="{/AssetName}" placeholder="Asset Name">
-                    <layoutData>
-                        <l:GridData />
-                    </layoutData>
                 </Input>
-                <Label text="Suitability" />
-                <Input value="{/Suitability}" type="Number" placeholder="Suitability">
-                    <layoutData>
-                        <l:GridData />
-                    </layoutData>
+
+                <Label text="Suitability"  class="sapUiSmallMarginTop  "  />
+                <Input value="{/Suitability}" type="Number" placeholder="Suitability">                   
                 </Input>
-                <Label text="Suitability Comment" />
-                <Input value="{/SuitabilityComment}" placeholder="Suitability Comment">
-                    <layoutData>
-                        <l:GridData />
-                    </layoutData>
+
+                <Label text="Suitability Comment" class="sapUiSmallMarginTop  "  />
+                <Input value="{/SuitabilityComment}" placeholder="Suitability Comment">                   
                 </Input>
-                <Label text="Value" />
-                <Input value="{/Value}" type="Number" placeholder="Value">
-                    <layoutData>
-                        <l:GridData />
-                    </layoutData>
+
+                <Label text="Value"  class="sapUiSmallMarginTop  " />
+                <Input value="{/Value}" type="Number" placeholder="Value">                   
                 </Input>
-                <Label text="Value Comment" />
-                <Input value="{/ValueComment}" placeholder="Value Comment">
-                    <layoutData>
-                        <l:GridData />
-                    </layoutData>
+
+                <Label text="Value Comment"  class="sapUiSmallMarginTop  " />
+                <Input value="{/ValueComment}" placeholder="Value Comment">                    
                 </Input>
-                <Label text="Durability" />
-                <Input value="{/Durability}" type="Number" placeholder="Durability">
-                    <layoutData>
-                        <l:GridData />
-                    </layoutData>
+
+                <Label text="Durability"  class="sapUiSmallMarginTop  " />
+                <Input value="{/Durability}" type="Number" placeholder="Durability">                   
                 </Input>
-                <Label text="Durability Comment" />
-                <Input value="{/DurabilityComment}" placeholder="Durability Comment">
-                    <layoutData>
-                        <l:GridData />
-                    </layoutData>
+
+                <Label text="Durability Comment"  class="sapUiSmallMarginTop  " />
+                <Input value="{/DurabilityComment}" placeholder="Durability Comment">   
                 </Input>
-                <Label text="Longevity" />
-                <Input value="{/Longevity}" type="Number" placeholder="Longevity">
-                    <layoutData>
-                        <l:GridData />
-                    </layoutData>
+
+                <Label text="Longevity" class="sapUiSmallMarginTop  "  />
+                <Input value="{/Longevity}" type="Number" placeholder="Longevity">                    
                 </Input>
-                <Label text="Longevity Comment" />
-                <Input value="{/LongevityComment}" placeholder="Longevity Comment">
-                    <layoutData>
-                        <l:GridData />
-                    </layoutData>
+
+                <Label text="Longevity Comment"  class="sapUiSmallMarginTop  " />
+                <Input value="{/LongevityComment}" placeholder="Longevity Comment">                     
                 </Input>
-                <Label text="Summary Comments" />
-                <Input value="{/SummaryComments}" placeholder="SummaryComments">
-                    <layoutData>
-                        <l:GridData />
-                    </layoutData>
+
+                <Label text="Summary Comments"  class="sapUiSmallMarginTop  " />
+                <Input value="{/SummaryComments}" placeholder="SummaryComments">                    
                 </Input>
-                <Label text="Date of Review" />
-                <Input value="{/SubmissionDate}" placeholder="Enter Date(YYYY-MM-DD)">
-                    <layoutData>
-                        <l:GridData />
-                    </layoutData>
+
+                <Label text="Date of Review"  class="sapUiSmallMarginTop  " />
+                <Input value="{/SubmissionDate}" placeholder="Enter Date(YYYY-MM-DD)">                  
                 </Input>
-                <Label text="Submitted By" />
-                <Input value="{/SubmittedBy}" placeholder="Submitted By">
-                    <layoutData>
-                        <l:GridData />
-                    </layoutData>
+
+                <Label text="Submitted By"  class="sapUiSmallMarginTop  " />
+                <Input value="{/SubmittedBy}" placeholder="Submitted By">                    
                 </Input>
+                
                 <Label text="" />
                 <Button text="Save" type="Accept" press="handleSaveBtnPress"></Button>
+                 <Label text="" />
                 <Button text="Cancel" type="Reject" press="handleCancelBtnPress"></Button>
             </f:content>
         </f:SimpleForm>
